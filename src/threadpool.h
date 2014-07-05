@@ -53,10 +53,9 @@ typedef enum {
  * @brief Creates a threadpool_t object.
  * @param thread_count Number of worker threads.
  * @param queue_size   Size of the queue.
- * @param flags        Unused parameter.
  * @return a newly created thread pool or NULL
  */
-threadpool_t *threadpool_create(int thread_count, int queue_size, int flags);
+threadpool_t *threadpool_create(int thread_count, int queue_size);
 
 /**
  * @function threadpool_add
@@ -64,12 +63,11 @@ threadpool_t *threadpool_create(int thread_count, int queue_size, int flags);
  * @param pool     Thread pool to which add the task.
  * @param function Pointer to the function that will perform the task.
  * @param argument Argument to be passed to the function.
- * @param flags    Unused parameter.
  * @return 0 if all goes well, negative values in case of error (@see
  * threadpool_error_t for codes).
  */
 int threadpool_add(threadpool_t *pool, void (*routine)(void *),
-                   void *arg, int flags);
+                   void *arg);
 
 /**
  * @function threadpool_destroy

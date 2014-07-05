@@ -27,7 +27,7 @@ void dummy_task(void *arg) {
     *pi += 1;
 
     if(*pi < QUEUES) {
-        assert(threadpool_add(pool[*pi], &dummy_task, arg, 0) == 0);
+        assert(threadpool_add(pool[*pi], &dummy_task, arg) == 0);
     } else {
         pthread_mutex_lock(&lock);
         left--;
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     pthread_mutex_init(&lock, NULL);
 
     for(i = 0; i < QUEUES; i++) {
-        pool[i] = threadpool_create(THREAD, SIZE, 0);
+        pool[i] = threadpool_create(THREAD, SIZE);
         assert(pool[i] != NULL);
     }
 
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 
     for(i = 0; i < SIZE; i++) {
         tasks[i] = 0;
-        assert(threadpool_add(pool[0], &dummy_task, &(tasks[i]), 0) == 0);
+        assert(threadpool_add(pool[0], &dummy_task, &(tasks[i])) == 0);
     }
 
     while(copy > 0) {

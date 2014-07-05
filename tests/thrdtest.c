@@ -24,11 +24,11 @@ int main(int argc, char **argv)
 
     pthread_mutex_init(&lock, NULL);
 
-    assert((pool = threadpool_create(THREAD, QUEUE, 0)) != NULL);
+    assert((pool = threadpool_create(THREAD, QUEUE)) != NULL);
     fprintf(stderr, "Pool started with %d threads and "
             "queue size of %d\n", THREAD, QUEUE);
 
-    while(threadpool_add(pool, &dummy_task, NULL, 0) == 0) {
+    while(threadpool_add(pool, &dummy_task, NULL) == 0) {
         pthread_mutex_lock(&lock);
         tasks++;
         pthread_mutex_unlock(&lock);
